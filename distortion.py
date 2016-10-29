@@ -14,7 +14,10 @@ objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 objpoints = [] # 3d point in real world space
 imgpoints = [] # 2d points in image plane.
 
-os.chdir("/Users/eren/Desktop/Vision/demo")
+os.chdir("/Users/eren/Desktop/ComputerVision/CameraCalibration")
+f = open('dir.txt', 'r')
+lines = f.readlines()
+os.chdir(lines[0])
 
 images = glob.glob('*.jpg')
 i=0
