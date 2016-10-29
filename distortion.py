@@ -19,7 +19,11 @@ f = open('dir.txt', 'r')
 lines = f.readlines()
 os.chdir(lines[0])
 
-images = glob.glob('*.jpg')
+types = ('*.jpg', '*.JPG')
+images = []
+for files in types:
+    images.extend(glob.glob(files))
+    
 i=0
 
 for fname in images:
@@ -39,12 +43,13 @@ for fname in images:
         # Draw and display the corners
         cv2.drawChessboardCorners(img, (7,6), corners,ret)
         
+        print fname
         cv2.imshow('img',img)
-        cv2.waitKey(10)
+        cv2.waitKey(1000)
                
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints,gray.shape[::-1] ,None,None)
 
-img = cv2.imread('left15.jpg')
+img = cv2.imread(fname)
 h,  w = img.shape[:2]
 newcameramtx, roi=cv2.getOptimalNewCameraMatrix(mtx,dist,(w,h),1,(w,h))
 
